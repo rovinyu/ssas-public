@@ -80,7 +80,7 @@ void CanNm_TxConfirmation(PduIdType TxPduId, Std_ReturnType result);
 /* @SWS_CanNm_00231 */
 void CanNm_RxIndication(PduIdType RxPduId, const PduInfoType *PduInfoPtr);
 
-/* @SWS_CanNm_00334 */
+/* @SWS_CanNm_00344 */
 void CanNm_ConfirmPnAvailability(NetworkHandleType nmChannelHandle);
 
 /* @SWS_CanNm_91001 */
