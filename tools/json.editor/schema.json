@@ -467,6 +467,16 @@
             "to": { "type": "string", "enum": ["CanIf", "CanTp", "OsekNm", "CanNm", "PduR", "Dcm", "Com", "LinTp", "DoIP"] }
           }
         }
+      },
+      "memory": {
+        "type": "array", "items": {
+          "type": "object", "title": "memory",
+          "properties": {
+            "name": { "type": "string" },
+            "size": { "type": "integer", "default": 0, "minimum": 0,"maximum": 65535 },
+            "number": { "type": "integer", "default": 0, "minimum": 0,"maximum": 64 }
+          }
+        }
       }
     }
   },
