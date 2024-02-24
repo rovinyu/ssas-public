@@ -81,7 +81,7 @@ Std_ReturnType Com_ReceiveSignalGroup(Com_SignalGroupIdType SignalGroupId);
 Std_ReturnType Com_SendSignalGroupArray(Com_SignalGroupIdType SignalGroupId,
                                         const uint8_t *SignalGroupArrayPtr);
 
-/* @SWS_Com_00855 */
+/* @SWS_Com_00854 */
 Std_ReturnType Com_ReceiveSignalGroupArray(Com_SignalGroupIdType SignalGroupId,
                                            uint8_t *SignalGroupArrayPtr);
 
