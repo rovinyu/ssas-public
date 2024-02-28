@@ -557,8 +557,11 @@ def extract(cfg, dir):
             network_ = dict(network)
             path = network['dbc']
             del network_['dbc']
+            base = path
             if not os.path.isfile(path):
                 path = os.path.abspath(os.path.join(dir, '..', path))
+            if not os.path.isfile(path):
+                path = os.path.abspath(os.path.join(dir, '../..', base))
             if not os.path.isfile(path):
                 raise Exception('File %s not exists' % (path))
             network_['messages'] = get_messages(path)

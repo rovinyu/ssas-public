@@ -449,7 +449,8 @@
                   "up": { "type": "string", "enum": ["CanTp", "OsekNm", "CanNm", "PduR", "Com"] }
                 }
               }
-            }
+            },
+            "dbc": {"type": "string", "description": "Data base CAN configuration file"}
           }
         }
       }
@@ -475,6 +476,17 @@
             "name": { "type": "string" },
             "size": { "type": "integer", "default": 0, "minimum": 0,"maximum": 65535 },
             "number": { "type": "integer", "default": 0, "minimum": 0,"maximum": 64 }
+          }
+        }
+      },
+      "networks": {
+        "type": "array", "items": {
+          "type": "object", "title": "network", "display_with_list": false,
+          "properties": {
+            "name": { "type": "string", "default": "CAN?" },
+            "network": { "type": "string", "default": "CAN", "enum": ["CAN", "CANFD", "LIN"] },
+            "me": { "type": "string", "default": "AS", "description": "self node name" },
+            "dbc": {"type": "string", "description": "Data base CAN configuration file"}
           }
         }
       }
@@ -543,7 +555,9 @@
                   }
                 }
               }
-            }
+            },
+            "dbc": {"type": "string", "description": "Data base CAN configuration file"},
+            "groups": {"type": "array", "items": {"type": "string", "title": "group_signal" } }
           }
         }
       }

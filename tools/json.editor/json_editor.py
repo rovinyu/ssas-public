@@ -342,10 +342,26 @@ class JsonBase(QTreeWidgetItem):
 
     def is_enabled(self, attr=None):
         prop = self.get_prop(attr)
-        es = prop.get('enabled', 'True')
+        if prop.get('type') == 'bool':
+            es = prop.get('default', 'False')
+        else:
+            es = prop.get('enabled', 'True')
+        if type(es) == bool:
+            if es == False:
+                init = self.get_init(attr)
+                if init is None:
+                    return False
+            return True
         es = self.preproc(es)
         logging.debug('attr %s of prop %s condition: %s', attr, prop, es)
-        return eval(es)
+        if eval(es) == False:
+            init = self.get_init(attr)
+            if init is None:
+                return False
+            else:
+                return True
+        else:
+            return True
 
     def find(self, url):
         url = self.preproc(url)
@@ -401,6 +417,16 @@ class JsonBase(QTreeWidgetItem):
         else:
             prop = self.schema
         return prop
+
+    def get_init(self, attr):
+        if None == attr:
+            return None
+
+        if '__init__' in self.schema:
+            init = self.schema['__init__']
+            if attr in init:
+                return init[attr]
+        return None
 
     def auto_field(self, attr):
         updated = False
@@ -769,9 +795,10 @@ class JsonObjectTree(QTreeWidget):
     def toJSON(self):
         cfg = {'class': self.title}
         for title, schema in self.schema['properties'].items():
-            jse = self.objMap[title].toJSON()
-            logging.debug('tree toJSON %s %s: %s' % (schema['type'], title, jse))
-            cfg[title] = jse
+            if self.objMap[title].schema.get('__init__'):
+                jse = self.objMap[title].toJSON()
+                logging.debug('tree toJSON %s %s: %s' % (schema['type'], title, jse))
+                cfg[title] = jse
         return cfg
 
     def onItemSelectionChanged(self):
