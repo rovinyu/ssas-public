@@ -134,7 +134,10 @@ class JsonEditor(QMainWindow):
                     else:
                         return None
                 else:
-                    cfg = cfg[u]
+                    if u in cfg:
+                        cfg = cfg[u]
+                    else:
+                        return None
         return cfg
 
     def mOpen(self, jsonFile=None):
