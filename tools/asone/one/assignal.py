@@ -299,7 +299,10 @@ class Network(threading.Thread):
             yield msg
 
     def __getitem__(self, key):
-        return self.msgs[key]
+        if key in self.msgs:
+            return self.msgs[key]
+        else:
+            return None
 
     def __getattr__(self, key):
         return self.__getitem__(key)
